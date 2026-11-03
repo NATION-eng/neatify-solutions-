@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sage-50: #F5F7F2;
+  --color-sage-100: #E5EBDD;
+  --color-sage-200: #D1DEC7;
+  --color-sage-300: #ADC4A1;
+  --color-sage-400: #7E9F71;
+  --color-sage-500: #526D55;
+  --color-sage-600: #425845;
+  --color-sage-700: #324234;
+  --color-sage-800: #233025;
+  --color-sage-900: #151D16;
+
+  --color-brand-leaf: #72B743;
+  --color-brand-forest: #204632;
+  --color-brand-deep: #142C1F;
+  --color-brand-pine: #193A27;
+
+  --color-warm-white: #F8F7F1;
+  --color-warm-cream: #F4F5F0;
+  --color-warm-beige: #D8C8B2;
+  --color-warm-card: #FFFFFF;
+
+  --color-charcoal-DEFAULT: #303B32;
+  --color-charcoal-900: #141A15;
+  --color-charcoal-800: #222923;
+  --color-charcoal-700: #303B32;
+  --color-charcoal-600: #4D584F;
+  --color-charcoal-muted: #667067;
+  --color-charcoal-border: #E2E7E2;
+
+  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+
+  --shadow-card: 0 12px 36px -4px rgba(24, 31, 26, 0.08);
+  --shadow-float: 0 20px 48px -8px rgba(20, 44, 31, 0.14);
+  --shadow-subtle: 0 4px 20px -2px rgba(24, 31, 26, 0.04);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom CleanSpace styling utilities */
+.glass-pill {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Custom modern scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F4F6F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #C4D2C3;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9DB49B;
+}
