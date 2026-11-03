@@ -258,6 +258,26 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
                     
+                    {/* Airbnb & Vacation Rental Option */}
+                    <div
+                      onClick={() => handleServiceSelect('Airbnb')}
+                      className={`cursor-pointer rounded-2xl p-4 sm:p-5 border-2 transition-all duration-200 flex sm:flex-col items-center sm:items-start gap-3 sm:gap-0 ${
+                        formData.serviceType === 'Airbnb'
+                          ? 'border-brand-forest bg-sage-50/70 ring-2 ring-brand-forest/10'
+                          : 'border-sage-200 hover:border-sage-300 bg-white'
+                      }`}
+                    >
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-sage-100 text-brand-forest flex items-center justify-center sm:mb-3 flex-shrink-0">
+                        <Key className="w-4 h-4 sm:w-5 sm:h-5" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-xs sm:text-sm text-charcoal-900">Airbnb / Cottage</div>
+                        <div className="text-[10px] sm:text-[11px] text-charcoal-muted mt-0.5">
+                          Guest Turnovers & Linens
+                        </div>
+                      </div>
+                    </div>
+
                     {/* Residential Option */}
                     <div
                       onClick={() => handleServiceSelect('Residential')}
@@ -294,26 +314,6 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                         <div className="font-bold text-xs sm:text-sm text-charcoal-900">Commercial</div>
                         <div className="text-[10px] sm:text-[11px] text-charcoal-muted mt-0.5">
                           Offices, Clinics & Workplaces
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Airbnb & Vacation Rental Option */}
-                    <div
-                      onClick={() => handleServiceSelect('Airbnb')}
-                      className={`cursor-pointer rounded-2xl p-4 sm:p-5 border-2 transition-all duration-200 flex sm:flex-col items-center sm:items-start gap-3 sm:gap-0 ${
-                        formData.serviceType === 'Airbnb'
-                          ? 'border-brand-forest bg-sage-50/70 ring-2 ring-brand-forest/10'
-                          : 'border-sage-200 hover:border-sage-300 bg-white'
-                      }`}
-                    >
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-sage-100 text-brand-forest flex items-center justify-center sm:mb-3 flex-shrink-0">
-                        <Key className="w-4 h-4 sm:w-5 sm:h-5" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-xs sm:text-sm text-charcoal-900">Airbnb / Cottage</div>
-                        <div className="text-[10px] sm:text-[11px] text-charcoal-muted mt-0.5">
-                          Guest Turnovers & Linens
                         </div>
                       </div>
                     </div>

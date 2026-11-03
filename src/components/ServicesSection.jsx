@@ -4,6 +4,22 @@ import { Home, Building2, Key, Check, ArrowUpRight } from 'lucide-react';
 export default function ServicesSection({ onSelectService }) {
   const services = [
     {
+      id: 'airbnb',
+      title: 'Airbnb & Vacation Rental',
+      category: 'Cottages & Short-Term',
+      icon: Key,
+      image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80',
+      description: 'Reliable turnover cleaning to prepare your rental property or cottage for 5-star guest reviews.',
+      inclusions: [
+        'Rapid same-day guest turnover service',
+        'Crisp bed making & linen preparation',
+        'Thorough kitchen & bathroom sanitizing',
+        'Property inspection & damage reporting',
+        'Recurring turnover schedules across cottage country'
+      ],
+      idealFor: 'Short-term rental hosts, cottage owners & property managers.'
+    },
+    {
       id: 'residential',
       title: 'Residential Cleaning',
       category: 'Home & Living',
@@ -34,22 +50,6 @@ export default function ServicesSection({ onSelectService }) {
         'Flexible after-hours & weekend schedules'
       ],
       idealFor: 'Offices, clinics, retail shops & commercial properties.'
-    },
-    {
-      id: 'airbnb',
-      title: 'Airbnb & Vacation Rental',
-      category: 'Cottages & Short-Term',
-      icon: Key,
-      image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80',
-      description: 'Reliable turnover cleaning to prepare your rental property or cottage for 5-star guest reviews.',
-      inclusions: [
-        'Rapid same-day guest turnover service',
-        'Crisp bed making & linen preparation',
-        'Thorough kitchen & bathroom sanitizing',
-        'Property inspection & damage reporting',
-        'Recurring turnover schedules across cottage country'
-      ],
-      idealFor: 'Short-term rental hosts, cottage owners & property managers.'
     }
   ];
 

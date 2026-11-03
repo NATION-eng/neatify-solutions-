@@ -36,6 +36,12 @@ export default function Footer({ onOpenQuote }) {
             </div>
             <ul className="space-y-2 text-xs sm:text-sm text-sage-200/80">
               <li>
+                <a href="#airbnb" className="hover:text-white transition-colors">Airbnb & Vacation Rental Turnovers</a>
+              </li>
+              <li>
+                <a href="#airbnb" className="hover:text-white transition-colors">Cottage Rental Staging</a>
+              </li>
+              <li>
                 <a href="#residential" className="hover:text-white transition-colors">Residential Cleaning</a>
               </li>
               <li>
@@ -46,12 +52,6 @@ export default function Footer({ onOpenQuote }) {
               </li>
               <li>
                 <a href="#commercial" className="hover:text-white transition-colors">Commercial & Office Cleaning</a>
-              </li>
-              <li>
-                <a href="#airbnb" className="hover:text-white transition-colors">Airbnb & Vacation Rental Turnovers</a>
-              </li>
-              <li>
-                <a href="#airbnb" className="hover:text-white transition-colors">Cottage Rental Staging</a>
               </li>
             </ul>
           </div>

@@ -42,6 +42,19 @@ export default function Navbar({ onOpenQuote }) {
               {servicesDropdown && (
                 <div className="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-xl rounded-2xl shadow-card border border-sage-100 p-2 text-xs animate-in fade-in slide-in-from-top-2 duration-200">
                   <a 
+                    href="#airbnb" 
+                    className="flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-sage-50 text-charcoal-800 transition-colors"
+                  >
+                    <div className="w-7 h-7 rounded-lg bg-sage-100 flex items-center justify-center text-brand-forest">
+                      <Key className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-charcoal-900">Airbnb & Vacation Rentals</div>
+                      <div className="text-[11px] text-charcoal-muted">Turnovers, Staging & Cottages</div>
+                    </div>
+                  </a>
+
+                  <a 
                     href="#residential" 
                     className="flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-sage-50 text-charcoal-800 transition-colors"
                   >
@@ -64,19 +77,6 @@ export default function Navbar({ onOpenQuote }) {
                     <div>
                       <div className="font-semibold text-charcoal-900">Commercial Cleaning</div>
                       <div className="text-[11px] text-charcoal-muted">Offices, Workspaces & Clinics</div>
-                    </div>
-                  </a>
-
-                  <a 
-                    href="#airbnb" 
-                    className="flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-sage-50 text-charcoal-800 transition-colors"
-                  >
-                    <div className="w-7 h-7 rounded-lg bg-sage-100 flex items-center justify-center text-brand-forest">
-                      <Key className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-charcoal-900">Airbnb & Vacation Rentals</div>
-                      <div className="text-[11px] text-charcoal-muted">Turnovers, Staging & Cottages</div>
                     </div>
                   </a>
                 </div>
@@ -171,6 +171,14 @@ export default function Navbar({ onOpenQuote }) {
                   Our Services
                 </div>
                 <a 
+                  href="#airbnb" 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-sage-50"
+                >
+                  <Key className="w-4 h-4 text-brand-forest" />
+                  Airbnb & Vacation Rentals
+                </a>
+                <a 
                   href="#residential" 
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-sage-50"
@@ -185,14 +193,6 @@ export default function Navbar({ onOpenQuote }) {
                 >
                   <Building2 className="w-4 h-4 text-brand-forest" />
                   Commercial Cleaning
-                </a>
-                <a 
-                  href="#airbnb" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-sage-50"
-                >
-                  <Key className="w-4 h-4 text-brand-forest" />
-                  Airbnb & Vacation Rentals
                 </a>
               </div>
               <div className="border-t border-sage-100 pt-2 flex flex-col gap-1">
