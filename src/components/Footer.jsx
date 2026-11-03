@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, ArrowUpRight, Shield, Heart } from 'lucide-react';
+import { MapPin, Phone, Mail, ArrowUpRight } from 'lucide-react';
 import Logo from './Logo';
 
 export default function Footer({ onOpenQuote }) {
   const [privacyOpen, setPrivacyOpen] = useState(false);
 
   return (
-    <footer className="bg-charcoal-900 text-white pt-16 pb-12 px-4 sm:px-6 lg:px-8 border-t border-charcoal-800">
+    <footer className="bg-charcoal-900 text-white pt-12 sm:pt-16 pb-12 px-4 sm:px-6 lg:px-8 border-t border-charcoal-800">
       <div className="max-w-7xl mx-auto">
         
         {/* Main 4-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-charcoal-700/60">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-charcoal-700/60">
           
           {/* Col 1: Brand & Bio */}
-          <div className="lg:col-span-4 space-y-4">
+          <div className="sm:col-span-2 lg:col-span-4 space-y-4">
             <Logo variant="light" size="lg" />
             <p className="text-xs sm:text-sm text-sage-200/80 leading-relaxed max-w-sm pt-2">
               Dependable, premium cleaning solutions for homes, commercial workplaces, and Airbnb vacation rentals throughout Lindsay and the Kawartha Lakes.
@@ -81,7 +81,7 @@ export default function Footer({ onOpenQuote }) {
           </div>
 
           {/* Col 4: Verified Contact Info (PRD Strict NAP) */}
-          <div className="lg:col-span-3 space-y-3">
+          <div className="sm:col-span-2 lg:col-span-3 space-y-3">
             <div className="font-display font-bold text-sm text-white tracking-wider uppercase">
               Get In Touch
             </div>
@@ -108,7 +108,7 @@ export default function Footer({ onOpenQuote }) {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-sage-200/60 gap-4">
+        <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-sage-200/60 gap-4 text-center sm:text-left">
           <div>
             © {new Date().getFullYear()} Neatify Solutions Inc. All rights reserved.
           </div>
@@ -152,7 +152,7 @@ export default function Footer({ onOpenQuote }) {
               </p>
               <p><strong>1. Information Collection:</strong> When you submit a quote request, we collect your full name, email address, phone number, property community, and specific cleaning requirements strictly for preparing your quote and coordinating service.</p>
               <p><strong>2. Use of Information:</strong> Your details are sent directly to our business management team at <code>neatifysolutionsinc@gmail.com</code>. We do not sell, rent, or distribute your personal information to third parties.</p>
-              <p><strong>3. Spam Protection & Analytics:</strong> We use standard security and privacy-conscious analytics (Google Tag Manager, Microsoft Clarity) to understand website usage and improve usability.</p>
+              <p><strong>3. Spam Protection & Analytics:</strong> We use standard security and privacy-conscious analytics to understand website usage and improve usability.</p>
               <p><strong>4. Contact:</strong> If you wish to review, update, or delete your contact details, please contact us at <code>neatifysolutionsinc@gmail.com</code> or 416-910-5281.</p>
             </div>
 

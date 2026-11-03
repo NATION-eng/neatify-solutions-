@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, CheckCircle2, ArrowRight, ArrowLeft, Home, Building2, Key, Calendar, MapPin, Phone, Mail, Sparkles } from 'lucide-react';
+import { X, CheckCircle2, ArrowRight, ArrowLeft, Home, Building2, Key, Phone, Mail } from 'lucide-react';
 
 export default function QuoteModal({ isOpen, onClose, defaultService = 'Residential' }) {
   const [step, setStep] = useState(1);
@@ -70,7 +70,7 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
       setIsSubmitting(false);
       setIsSubmitted(true);
       console.log('Lead successfully captured for neatifysolutionsinc@gmail.com:', formData);
-    }, 800);
+    }, 600);
   };
 
   const handleReset = () => {
@@ -80,19 +80,19 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-charcoal-900/60 backdrop-blur-sm animate-in fade-in duration-200">
       
-      {/* Modal Container */}
+      {/* Modal Container: Bottom sheet on mobile, centered modal on desktop */}
       <div 
-        className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-sage-100 overflow-hidden flex flex-col max-h-[90vh]"
+        className="relative w-full max-w-2xl bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-sage-100 overflow-hidden flex flex-col max-h-[92vh] sm:max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         
         {/* Header Bar */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-sage-100 bg-sage-50/70">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-sage-100 bg-sage-50/80">
           <div className="flex items-center gap-2">
             <div className="w-2.5 h-2.5 rounded-full bg-brand-leaf animate-pulse"></div>
-            <span className="text-xs font-bold uppercase tracking-wider text-charcoal-700 font-display">
+            <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-charcoal-700 font-display">
               Request a Cleaning Quote • Kawartha Lakes
             </span>
           </div>
@@ -105,16 +105,16 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
           </button>
         </div>
 
-        {/* Modal Body */}
-        <div className="p-6 sm:p-8 overflow-y-auto">
+        {/* Modal Body with touch scrolling */}
+        <div className="p-4 sm:p-8 overflow-y-auto overscroll-contain">
           
           {/* Progress Indicator */}
           {!isSubmitted && (
-            <div className="mb-8">
-              <div className="flex items-center justify-between text-xs font-semibold text-charcoal-muted mb-2">
-                <span className={step >= 1 ? 'text-brand-forest font-bold' : ''}>1. Service Selection</span>
-                <span className={step >= 2 ? 'text-brand-forest font-bold' : ''}>2. Property Scope</span>
-                <span className={step >= 3 ? 'text-brand-forest font-bold' : ''}>3. Details & Contact</span>
+            <div className="mb-6 sm:mb-8">
+              <div className="flex items-center justify-between text-[11px] sm:text-xs font-semibold text-charcoal-muted mb-2">
+                <span className={step >= 1 ? 'text-brand-forest font-bold' : ''}>1. Service</span>
+                <span className={step >= 2 ? 'text-brand-forest font-bold' : ''}>2. Property</span>
+                <span className={step >= 3 ? 'text-brand-forest font-bold' : ''}>3. Contact</span>
               </div>
               <div className="h-1.5 w-full bg-sage-100 rounded-full overflow-hidden">
                 <div 
@@ -127,29 +127,29 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
 
           {/* SUCCESS STATE (Strictly Matching PRD Section 7.3) */}
           {isSubmitted ? (
-            <div className="py-6 text-center space-y-5 animate-in zoom-in-95 duration-200">
-              <div className="w-16 h-16 rounded-full bg-sage-100 text-brand-forest flex items-center justify-center mx-auto ring-8 ring-sage-50">
-                <CheckCircle2 className="w-8 h-8" />
+            <div className="py-4 sm:py-6 text-center space-y-4 sm:space-y-5 animate-in zoom-in-95 duration-200">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-sage-100 text-brand-forest flex items-center justify-center mx-auto ring-8 ring-sage-50">
+                <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8" />
               </div>
               
               <div className="space-y-2">
-                <h3 className="text-2xl font-display font-bold text-charcoal-900">
+                <h3 className="text-xl sm:text-2xl font-display font-bold text-charcoal-900">
                   Quote Request Received!
                 </h3>
-                <div className="max-w-md mx-auto text-sm text-charcoal-700 bg-sage-50/80 border border-sage-200/80 rounded-2xl p-4 leading-relaxed text-left">
-                  <p className="font-medium text-charcoal-900 mb-1">
+                <div className="max-w-md mx-auto text-xs sm:text-sm text-charcoal-700 bg-sage-50/90 border border-sage-200/80 rounded-2xl p-4 leading-relaxed text-left">
+                  <p className="font-bold text-charcoal-900 mb-1">
                     Official Confirmation:
                   </p>
                   "Thank you for contacting Neatify Solutions. Your quote request has been submitted. We appreciate your interest and will review the details provided. If you need to add information, please contact us using the phone number shown on this website."
                 </div>
               </div>
 
-              <div className="pt-2 text-xs text-charcoal-muted flex items-center justify-center gap-1.5">
-                <Mail className="w-4 h-4 text-brand-leaf" />
+              <div className="pt-1 text-[11px] sm:text-xs text-charcoal-muted flex items-center justify-center gap-1.5">
+                <Mail className="w-3.5 h-3.5 text-brand-leaf" />
                 <span>Notification dispatched to: <strong>neatifysolutionsinc@gmail.com</strong></span>
               </div>
 
-              <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
+              <div className="pt-3 flex flex-col sm:flex-row gap-2.5 justify-center">
                 <a
                   href="tel:4169105281"
                   className="inline-flex items-center justify-center gap-2 bg-sage-50 border border-sage-200 px-5 py-2.5 rounded-full text-xs font-semibold text-charcoal-800 hover:bg-sage-100"
@@ -170,34 +170,34 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
               
               {/* STEP 1: SERVICE SELECTION */}
               {step === 1 && (
-                <div className="space-y-6">
+                <div className="space-y-5">
                   <div>
-                    <h3 className="text-xl font-display font-bold text-charcoal-900">
+                    <h3 className="text-lg sm:text-xl font-display font-bold text-charcoal-900">
                       What type of cleaning do you need?
                     </h3>
-                    <p className="text-xs text-charcoal-muted mt-1">
+                    <p className="text-xs text-charcoal-muted mt-0.5">
                       Choose the service category tailored to your property.
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
                     
                     {/* Residential Option */}
                     <div
                       onClick={() => handleServiceSelect('Residential')}
-                      className={`cursor-pointer rounded-2xl p-5 border-2 transition-all duration-200 flex flex-col justify-between ${
+                      className={`cursor-pointer rounded-2xl p-4 sm:p-5 border-2 transition-all duration-200 flex sm:flex-col items-center sm:items-start gap-3 sm:gap-0 ${
                         formData.serviceType === 'Residential'
-                          ? 'border-brand-forest bg-sage-50/60 ring-2 ring-brand-forest/10'
+                          ? 'border-brand-forest bg-sage-50/70 ring-2 ring-brand-forest/10'
                           : 'border-sage-200 hover:border-sage-300 bg-white'
                       }`}
                     >
-                      <div className="w-10 h-10 rounded-xl bg-sage-100 text-brand-forest flex items-center justify-center mb-3">
-                        <Home className="w-5 h-5" />
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-sage-100 text-brand-forest flex items-center justify-center sm:mb-3 flex-shrink-0">
+                        <Home className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
                       <div>
-                        <div className="font-bold text-sm text-charcoal-900">Residential</div>
-                        <div className="text-[11px] text-charcoal-muted mt-0.5">
-                          Homes, Condos, Deep Clean & Move-In/Out
+                        <div className="font-bold text-xs sm:text-sm text-charcoal-900">Residential</div>
+                        <div className="text-[10px] sm:text-[11px] text-charcoal-muted mt-0.5">
+                          Homes, Deep Clean & Move-In
                         </div>
                       </div>
                     </div>
@@ -205,19 +205,19 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                     {/* Commercial Option */}
                     <div
                       onClick={() => handleServiceSelect('Commercial')}
-                      className={`cursor-pointer rounded-2xl p-5 border-2 transition-all duration-200 flex flex-col justify-between ${
+                      className={`cursor-pointer rounded-2xl p-4 sm:p-5 border-2 transition-all duration-200 flex sm:flex-col items-center sm:items-start gap-3 sm:gap-0 ${
                         formData.serviceType === 'Commercial'
-                          ? 'border-brand-forest bg-sage-50/60 ring-2 ring-brand-forest/10'
+                          ? 'border-brand-forest bg-sage-50/70 ring-2 ring-brand-forest/10'
                           : 'border-sage-200 hover:border-sage-300 bg-white'
                       }`}
                     >
-                      <div className="w-10 h-10 rounded-xl bg-sage-100 text-brand-forest flex items-center justify-center mb-3">
-                        <Building2 className="w-5 h-5" />
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-sage-100 text-brand-forest flex items-center justify-center sm:mb-3 flex-shrink-0">
+                        <Building2 className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
                       <div>
-                        <div className="font-bold text-sm text-charcoal-900">Commercial</div>
-                        <div className="text-[11px] text-charcoal-muted mt-0.5">
-                          Offices, Facilities & Workplaces
+                        <div className="font-bold text-xs sm:text-sm text-charcoal-900">Commercial</div>
+                        <div className="text-[10px] sm:text-[11px] text-charcoal-muted mt-0.5">
+                          Offices, Clinics & Workplaces
                         </div>
                       </div>
                     </div>
@@ -225,19 +225,19 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                     {/* Airbnb & Vacation Rental Option */}
                     <div
                       onClick={() => handleServiceSelect('Airbnb')}
-                      className={`cursor-pointer rounded-2xl p-5 border-2 transition-all duration-200 flex flex-col justify-between ${
+                      className={`cursor-pointer rounded-2xl p-4 sm:p-5 border-2 transition-all duration-200 flex sm:flex-col items-center sm:items-start gap-3 sm:gap-0 ${
                         formData.serviceType === 'Airbnb'
-                          ? 'border-brand-forest bg-sage-50/60 ring-2 ring-brand-forest/10'
+                          ? 'border-brand-forest bg-sage-50/70 ring-2 ring-brand-forest/10'
                           : 'border-sage-200 hover:border-sage-300 bg-white'
                       }`}
                     >
-                      <div className="w-10 h-10 rounded-xl bg-sage-100 text-brand-forest flex items-center justify-center mb-3">
-                        <Key className="w-5 h-5" />
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-sage-100 text-brand-forest flex items-center justify-center sm:mb-3 flex-shrink-0">
+                        <Key className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
                       <div>
-                        <div className="font-bold text-sm text-charcoal-900">Airbnb / Cottage</div>
-                        <div className="text-[11px] text-charcoal-muted mt-0.5">
-                          Guest Turnovers & Vacation Rentals
+                        <div className="font-bold text-xs sm:text-sm text-charcoal-900">Airbnb / Cottage</div>
+                        <div className="text-[10px] sm:text-[11px] text-charcoal-muted mt-0.5">
+                          Guest Turnovers & Linens
                         </div>
                       </div>
                     </div>
@@ -272,12 +272,12 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
 
               {/* STEP 2: PROPERTY SCOPE & LOCATION */}
               {step === 2 && (
-                <div className="space-y-5">
+                <div className="space-y-4 sm:space-y-5">
                   <div>
-                    <h3 className="text-xl font-display font-bold text-charcoal-900">
+                    <h3 className="text-lg sm:text-xl font-display font-bold text-charcoal-900">
                       Property & Coverage Area
                     </h3>
-                    <p className="text-xs text-charcoal-muted mt-1">
+                    <p className="text-xs text-charcoal-muted mt-0.5">
                       Help us understand your space so we can tailor the quote accurately.
                     </p>
                   </div>
@@ -311,7 +311,7 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                           placeholder="Enter your town, municipality or postal code"
                           value={formData.customLocation}
                           onChange={(e) => setFormData({ ...formData, customLocation: e.target.value })}
-                          className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
+                          className="w-full text-base sm:text-xs px-3.5 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
                         />
                         {errors.customLocation && (
                           <p className="text-[11px] text-red-500 mt-1">{errors.customLocation}</p>
@@ -322,7 +322,7 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
 
                   {/* Room selectors for Residential / Airbnb */}
                   {formData.serviceType !== 'Commercial' ? (
-                    <div className="grid grid-cols-2 gap-3 pt-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                       <div>
                         <label className="block text-xs font-bold text-charcoal-800 mb-1">
                           Bedrooms
@@ -330,7 +330,7 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                         <select
                           value={formData.bedrooms}
                           onChange={(e) => setFormData({ ...formData, bedrooms: e.target.value })}
-                          className="w-full text-xs px-3 py-2.5 rounded-xl border border-sage-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
+                          className="w-full text-base sm:text-xs px-3 py-2.5 rounded-xl border border-sage-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
                         >
                           <option>1 Bedroom</option>
                           <option>2 Bedrooms</option>
@@ -347,7 +347,7 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                         <select
                           value={formData.bathrooms}
                           onChange={(e) => setFormData({ ...formData, bathrooms: e.target.value })}
-                          className="w-full text-xs px-3 py-2.5 rounded-xl border border-sage-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
+                          className="w-full text-base sm:text-xs px-3 py-2.5 rounded-xl border border-sage-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
                         >
                           <option>1 Bathroom</option>
                           <option>1.5 Bathrooms</option>
@@ -365,7 +365,7 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                       <select
                         value={formData.propertyType}
                         onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
-                        className="w-full text-xs px-3 py-2.5 rounded-xl border border-sage-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
+                        className="w-full text-base sm:text-xs px-3 py-2.5 rounded-xl border border-sage-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
                       >
                         <option>Under 1,500 sq ft (Small Office)</option>
                         <option>1,500 – 3,500 sq ft (Medium Facility)</option>
@@ -375,17 +375,17 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                     </div>
                   )}
 
-                  {/* Specific requirements or requests */}
+                  {/* Specific notes */}
                   <div>
                     <label className="block text-xs font-bold text-charcoal-800 mb-1">
-                      Specific Notes or Cleaning Requests (Optional)
+                      Specific Notes or Requests (Optional)
                     </label>
                     <textarea
                       rows={2}
                       placeholder="e.g. Inside oven, move-in clean, guest turnover on Friday, pet home..."
                       value={formData.propertyDetails}
                       onChange={(e) => setFormData({ ...formData, propertyDetails: e.target.value })}
-                      className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
+                      className="w-full text-base sm:text-xs px-3.5 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
                     ></textarea>
                   </div>
 
@@ -394,9 +394,9 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
 
               {/* STEP 3: CONTACT & PREFERRED TIMEFRAME */}
               {step === 3 && (
-                <div className="space-y-4">
+                <div className="space-y-3.5">
                   <div>
-                    <h3 className="text-xl font-display font-bold text-charcoal-900">
+                    <h3 className="text-lg sm:text-xl font-display font-bold text-charcoal-900">
                       Contact & Scheduling Details
                     </h3>
                     <p className="text-xs text-charcoal-muted mt-0.5">
@@ -414,7 +414,7 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                         placeholder="e.g. Sarah Jenkins"
                         value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
+                        className="w-full text-base sm:text-xs px-3.5 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
                       />
                       {errors.fullName && <p className="text-[11px] text-red-500 mt-1">{errors.fullName}</p>}
                     </div>
@@ -428,7 +428,7 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                         placeholder="(416) 000-0000"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
+                        className="w-full text-base sm:text-xs px-3.5 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
                       />
                       {errors.phone && <p className="text-[11px] text-red-500 mt-1">{errors.phone}</p>}
                     </div>
@@ -444,7 +444,7 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                         placeholder="yourname@gmail.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
+                        className="w-full text-base sm:text-xs px-3.5 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
                       />
                       {errors.email && <p className="text-[11px] text-red-500 mt-1">{errors.email}</p>}
                     </div>
@@ -458,7 +458,7 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                         placeholder="e.g. Next Tuesday or ASAP"
                         value={formData.preferredDate}
                         onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                        className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
+                        className="w-full text-base sm:text-xs px-3.5 py-2.5 rounded-xl border border-sage-200 focus:outline-none focus:ring-2 focus:ring-brand-forest/20 focus:border-brand-forest"
                       />
                     </div>
                   </div>
@@ -473,7 +473,7 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                       className="mt-0.5 rounded border-sage-300 text-brand-forest focus:ring-brand-forest"
                     />
                     <label htmlFor="privacyConsent" className="text-[11px] text-charcoal-muted leading-tight">
-                      I agree that Neatify Solutions may contact me via email or phone regarding this cleaning quote request in accordance with the Canadian privacy standards.
+                      I agree that Neatify Solutions may contact me via email or phone regarding this cleaning quote request.
                     </label>
                   </div>
 
@@ -481,12 +481,12 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
               )}
 
               {/* Form Navigation Controls */}
-              <div className="pt-6 mt-6 border-t border-sage-100 flex items-center justify-between">
+              <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-sage-100 flex items-center justify-between">
                 {step > 1 ? (
                   <button
                     type="button"
                     onClick={() => setStep(step - 1)}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-charcoal-muted hover:text-charcoal-900 px-3 py-2 rounded-xl transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-charcoal-muted hover:text-charcoal-900 px-3 py-2.5 rounded-xl transition-colors"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     Back
@@ -499,7 +499,7 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="inline-flex items-center gap-2 bg-brand-forest hover:bg-brand-deep text-white text-xs font-semibold px-6 py-2.5 rounded-full transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-2 bg-brand-forest hover:bg-brand-deep text-white text-xs sm:text-sm font-semibold px-6 py-2.5 rounded-full transition-colors cursor-pointer"
                   >
                     Continue
                     <ArrowRight className="w-4 h-4" />
@@ -508,7 +508,7 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center gap-2 bg-brand-forest hover:bg-brand-deep text-white text-xs font-semibold px-7 py-2.5 rounded-full shadow-md transition-all cursor-pointer disabled:opacity-50"
+                    className="inline-flex items-center gap-2 bg-brand-forest hover:bg-brand-deep text-white text-xs sm:text-sm font-semibold px-6 sm:px-7 py-2.5 rounded-full shadow-md transition-all cursor-pointer disabled:opacity-50"
                   >
                     {isSubmitting ? 'Submitting Details...' : 'Submit Quote Request ↗'}
                   </button>

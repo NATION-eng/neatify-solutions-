@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, ArrowUpRight, Menu, X, ChevronDown, Sparkles, Home, Building2, Key } from 'lucide-react';
+import { Phone, ArrowUpRight, Menu, X, ChevronDown, Home, Building2, Key } from 'lucide-react';
 import Logo from './Logo';
 
 export default function Navbar({ onOpenQuote }) {
@@ -7,11 +7,11 @@ export default function Navbar({ onOpenQuote }) {
   const [servicesDropdown, setServicesDropdown] = useState(false);
 
   return (
-    <header className="relative z-40 pt-4 px-4 sm:px-6 lg:px-8">
+    <header className="relative z-40 pt-3 sm:pt-4 px-3 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <nav className="glass-pill border border-white/60 bg-white/90 backdrop-blur-md rounded-full px-5 py-3 shadow-subtle flex items-center justify-between transition-all duration-300">
+        <nav className="glass-pill border border-white/70 bg-white/95 backdrop-blur-md rounded-full px-3.5 sm:px-5 py-2.5 sm:py-3 shadow-subtle flex items-center justify-between transition-all duration-300">
           
-          {/* Brand Logo */}
+          {/* Brand Logo with exact uploaded graphic */}
           <a href="#" className="flex-shrink-0">
             <Logo />
           </a>
@@ -63,7 +63,7 @@ export default function Navbar({ onOpenQuote }) {
                     </div>
                     <div>
                       <div className="font-semibold text-charcoal-900">Commercial Cleaning</div>
-                      <div className="text-[11px] text-charcoal-muted">Offices, Workspaces & Facilities</div>
+                      <div className="text-[11px] text-charcoal-muted">Offices, Workspaces & Clinics</div>
                     </div>
                   </a>
 
@@ -113,7 +113,7 @@ export default function Navbar({ onOpenQuote }) {
           </div>
 
           {/* Right Action Buttons */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2.5 md:gap-3">
             {/* Click-to-call direct phone */}
             <a 
               href="tel:4169105281" 
@@ -123,25 +123,26 @@ export default function Navbar({ onOpenQuote }) {
               <span>416-910-5281</span>
             </a>
 
-            {/* "Get a Quote" Pill Button matching CleanSpace */}
+            {/* "Get a Quote" Pill Button */}
             <button 
               onClick={onOpenQuote}
-              className="group inline-flex items-center gap-2 bg-brand-forest hover:bg-brand-deep text-white text-xs sm:text-sm font-semibold pl-4 pr-1.5 py-1.5 rounded-full shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer"
+              className="group inline-flex items-center gap-2 bg-brand-forest hover:bg-brand-deep text-white text-xs sm:text-sm font-semibold pl-3.5 sm:pl-4 pr-1.5 py-1.5 rounded-full shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer"
             >
               <span>Get a Quote</span>
-              <div className="w-7 h-7 rounded-full bg-white/20 group-hover:bg-brand-leaf text-white flex items-center justify-center transition-colors">
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white/20 group-hover:bg-brand-leaf text-white flex items-center justify-center transition-colors">
+                <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="flex sm:hidden items-center gap-2">
+          {/* Mobile Actions: Quote + Hamburger */}
+          <div className="flex lg:hidden items-center gap-1.5 sm:gap-2">
             <button 
               onClick={onOpenQuote}
-              className="inline-flex items-center gap-1.5 bg-brand-forest text-white text-xs font-semibold px-3 py-1.5 rounded-full"
+              className="inline-flex sm:hidden items-center gap-1 bg-brand-forest text-white text-[11px] font-bold px-3 py-1.5 rounded-full"
             >
-              Quote
+              <span>Quote</span>
+              <ArrowUpRight className="w-3 h-3 text-brand-leaf" />
             </button>
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -157,7 +158,7 @@ export default function Navbar({ onOpenQuote }) {
         {/* Mobile Dropdown Menu Drawer */}
         {mobileMenuOpen && (
           <div className="lg:hidden mt-2 bg-white/98 backdrop-blur-xl border border-sage-100 rounded-3xl p-5 shadow-card animate-in fade-in slide-in-from-top-2 duration-200">
-            <div className="flex flex-col gap-3 font-medium text-sm text-charcoal-800">
+            <div className="flex flex-col gap-2 font-medium text-sm text-charcoal-800">
               <a 
                 href="#home" 
                 onClick={() => setMobileMenuOpen(false)}

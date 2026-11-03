@@ -9,7 +9,6 @@ import FAQSection from './components/FAQSection';
 import Footer from './components/Footer';
 import MobileQuickBar from './components/MobileQuickBar';
 import QuoteModal from './components/QuoteModal';
-import { Phone, MapPin, Sparkles } from 'lucide-react';
 
 export default function App() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -21,13 +20,13 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#EEF1EC] text-charcoal-800 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#EEF1EC] text-charcoal-800 flex flex-col font-sans overflow-x-hidden pb-20 sm:pb-0">
       
       {/* Top Regional Notification Bar */}
-      <div className="bg-brand-forest text-white text-[11px] sm:text-xs py-2 px-4 text-center font-medium flex items-center justify-center gap-2 border-b border-brand-pine">
-        <span className="inline-block w-2 h-2 rounded-full bg-brand-leaf animate-pulse"></span>
-        <span>
-          Serving Lindsay, Bobcaygeon, Fenelon Falls & Kawartha Lakes • Direct Line:{' '}
+      <div className="bg-brand-forest text-white text-[11px] sm:text-xs py-2 px-3 text-center font-medium flex items-center justify-center gap-2 border-b border-brand-pine">
+        <span className="inline-block w-2 h-2 rounded-full bg-brand-leaf animate-pulse flex-shrink-0"></span>
+        <span className="truncate sm:overflow-visible">
+          Serving Lindsay, Bobcaygeon, Fenelon Falls & Kawartha Lakes • Direct:{' '}
           <a href="tel:4169105281" className="font-bold underline hover:text-brand-leaf ml-1">
             416-910-5281
           </a>
@@ -39,7 +38,7 @@ export default function App() {
 
       {/* Main Content Body */}
       <main className="flex-1">
-        {/* Hero Section styled after CleanSpace reference */}
+        {/* Hero Section */}
         <Hero onOpenQuote={() => handleOpenQuote('Residential')} />
 
         {/* 3 Core Services: Residential, Commercial, Airbnb */}
