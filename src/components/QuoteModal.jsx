@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { X, CheckCircle2, ArrowRight, ArrowLeft, Home, Building2, Key, Phone, Mail, Check, BellRing, Calendar, MapPin } from 'lucide-react';
+import { X, CheckCircle2, ArrowRight, ArrowLeft, Home, Building2, Key, Phone, Mail, Check, AlertCircle, ExternalLink } from 'lucide-react';
 
 export default function QuoteModal({ isOpen, onClose, defaultService = 'Residential' }) {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
+  const [dispatchStatus, setDispatchStatus] = useState(null);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -67,7 +68,6 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
     setIsSubmitting(true);
 
     try {
-      // Dispatch to Vercel Serverless Function /api/quote
       const response = await fetch('/api/quote', {
         method: 'POST',
         headers: {
@@ -77,11 +77,13 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
         body: JSON.stringify(formData)
       });
 
-      await response.json().catch(() => ({}));
+      const result = await response.json().catch(() => ({}));
+      setDispatchStatus(result);
       setSubmittedData({ ...formData });
 
     } catch (err) {
       console.warn('API route fallback triggered:', err);
+      setDispatchStatus({ success: false, requiresConfiguration: true });
       setSubmittedData({ ...formData });
     } finally {
       setIsSubmitting(false);
@@ -91,12 +93,31 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
 
   const handleReset = () => {
     setIsSubmitted(false);
+    setDispatchStatus(null);
     setStep(1);
     onClose();
   };
 
   const locationText = formData.community === 'Other' ? (formData.customLocation || 'Kawartha Lakes') : formData.community;
   const propertyScope = formData.serviceType === 'Commercial' ? formData.propertyType : `${formData.bedrooms}, ${formData.bathrooms}`;
+
+  // Direct 1-tap pre-filled mailto backup URL
+  const mailSubject = encodeURIComponent(`[Booking Request] ${formData.serviceType} Cleaning - ${formData.fullName}`);
+  const mailBody = encodeURIComponent(
+    `Hello Neatify Solutions,\n\n` +
+    `I am requesting a quote with the following details:\n` +
+    `• Customer Name: ${formData.fullName}\n` +
+    `• Phone Number: ${formData.phone}\n` +
+    `• Email Address: ${formData.email}\n` +
+    `• Service: ${formData.serviceType} Cleaning\n` +
+    `• Location: ${locationText}\n` +
+    `• Scope: ${propertyScope}\n` +
+    `• Frequency: ${formData.frequency}\n` +
+    `• Preferred Timing: ${formData.preferredDate || 'Flexible / ASAP'}\n` +
+    `• Special Notes: ${formData.propertyDetails || 'None'}\n\n` +
+    `Looking forward to hearing from your team.`
+  );
+  const directMailtoUrl = `mailto:neatifysolutionsinc@gmail.com?subject=${mailSubject}&body=${mailBody}`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-charcoal-900/60 backdrop-blur-sm animate-in fade-in duration-200">
@@ -190,6 +211,21 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                     </p>
                   </div>
                 </div>
+              </div>
+
+              {/* Instant 1-Tap Email Dispatch Action (Guaranteed to Work Immediately) */}
+              <div className="max-w-md mx-auto bg-white border border-sage-200 rounded-2xl p-4 text-left">
+                <div className="text-xs text-charcoal-800 mb-2">
+                  <strong>Need immediate confirmation?</strong> Tap below to send this booking directly from your email app to our inbox:
+                </div>
+                <a
+                  href={directMailtoUrl}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-brand-forest hover:bg-brand-deep text-white py-2.5 px-4 rounded-xl text-xs font-bold shadow-sm transition-all"
+                >
+                  <Mail className="w-4 h-4 text-brand-leaf" />
+                  <span>Send Booking via My Email App (1 Tap)</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-70" />
+                </a>
               </div>
 
               {/* Booking Summary Card */}

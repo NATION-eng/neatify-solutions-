@@ -34,7 +34,7 @@ export default async function handler(req, res) {
     const location = community === 'Other' ? (customLocation || 'Outside Core Area') : (community || 'Kawartha Lakes');
     const propertyScope = serviceType === 'Commercial' ? propertyType : `${bedrooms || ''}, ${bathrooms || ''}`;
 
-    // 1. Email to Business Owner (neatifysolutionsinc@gmail.com)
+    // 1. Email HTML Template for Business Owner (neatifysolutionsinc@gmail.com)
     const ownerSubject = `[New Booking Request] ${serviceType || 'General'} - ${fullName} (${location})`;
     const ownerHtml = `
       <!DOCTYPE html>
@@ -84,7 +84,7 @@ export default async function handler(req, res) {
       </html>
     `;
 
-    // 2. Email to the Client (Auto-Confirmation from neatifysolutionsinc@gmail.com)
+    // 2. Email HTML Template for Client Auto-Confirmation
     const clientSubject = `Your Booking Request with Neatify Solutions (${serviceType || 'Residential'} Cleaning)`;
     const clientHtml = `
       <!DOCTYPE html>
@@ -150,15 +150,56 @@ export default async function handler(req, res) {
 
     let ownerEmailSent = false;
     let clientEmailSent = false;
-    let transportMethod = 'simulation';
+    let transportMethod = 'none';
 
-    // 1. Resend API: Send to both Owner and Client
-    if (process.env.RESEND_API_KEY) {
+    // -------------------------------------------------------------
+    // PRIORITY 1: Google SMTP via Nodemailer (Free & Direct)
+    // Triggered when GMAIL_APP_PASSWORD is set in Vercel Environment Variables
+    // -------------------------------------------------------------
+    const gmailPass = process.env.GMAIL_APP_PASSWORD || process.env.SMTP_PASS;
+    if (gmailPass) {
+      try {
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: process.env.GMAIL_USER || businessEmail,
+            pass: gmailPass.replace(/\s+/g, '') // remove spaces from 16-letter app password
+          }
+        });
+
+        // Send to owner
+        await transporter.sendMail({
+          from: `"Neatify Website" <${process.env.GMAIL_USER || businessEmail}>`,
+          to: businessEmail,
+          replyTo: email,
+          subject: ownerSubject,
+          html: ownerHtml
+        });
+        ownerEmailSent = true;
+
+        // Send confirmation to client
+        await transporter.sendMail({
+          from: `"Neatify Solutions" <${process.env.GMAIL_USER || businessEmail}>`,
+          to: email,
+          replyTo: businessEmail,
+          subject: clientSubject,
+          html: clientHtml
+        });
+        clientEmailSent = true;
+        transportMethod = 'gmail_smtp';
+      } catch (smtpErr) {
+        console.error('Nodemailer Gmail SMTP dispatch error:', smtpErr);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // PRIORITY 2: Resend API (If RESEND_API_KEY is configured in Vercel)
+    // -------------------------------------------------------------
+    if (!ownerEmailSent && process.env.RESEND_API_KEY) {
       try {
         const sender = process.env.SENDER_EMAIL || 'Neatify Solutions <quotes@neatifysolutions.ca>';
         
-        // Dispatch to owner
-        await fetch('https://api.resend.com/emails', {
+        const resendOwner = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -172,78 +213,45 @@ export default async function handler(req, res) {
             html: ownerHtml
           })
         });
-        ownerEmailSent = true;
 
-        // Dispatch confirmation to client
-        await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
-          },
-          body: JSON.stringify({
-            from: sender,
-            to: [email],
-            reply_to: businessEmail,
-            subject: clientSubject,
-            html: clientHtml
-          })
-        });
-        clientEmailSent = true;
-        transportMethod = 'resend';
-      } catch (err) {
-        console.warn('Resend dual dispatch failed, trying SMTP...', err);
+        if (resendOwner.ok) {
+          ownerEmailSent = true;
+          transportMethod = 'resend';
+
+          // Send confirmation to client
+          await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
+            },
+            body: JSON.stringify({
+              from: sender,
+              to: [email],
+              reply_to: businessEmail,
+              subject: clientSubject,
+              html: clientHtml
+            })
+          });
+          clientEmailSent = true;
+        }
+      } catch (resendErr) {
+        console.error('Resend dispatch error:', resendErr);
       }
     }
 
-    // 2. Nodemailer SMTP: Send to both Owner and Client
-    if ((!ownerEmailSent || !clientEmailSent) && (process.env.SMTP_HOST || process.env.GMAIL_APP_PASSWORD)) {
+    // -------------------------------------------------------------
+    // PRIORITY 3: Web3Forms (If WEB3FORMS_ACCESS_KEY is configured)
+    // -------------------------------------------------------------
+    if (!ownerEmailSent && process.env.WEB3FORMS_ACCESS_KEY) {
       try {
-        const transporter = nodemailer.createTransport({
-          host: process.env.SMTP_HOST || 'smtp.gmail.com',
-          port: parseInt(process.env.SMTP_PORT || '465'),
-          secure: process.env.SMTP_PORT === '587' ? false : true,
-          auth: {
-            user: process.env.SMTP_USER || process.env.GMAIL_USER || businessEmail,
-            pass: process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD
-          }
-        });
-
-        // Send to owner
-        await transporter.sendMail({
-          from: `"Neatify Solutions" <${businessEmail}>`,
-          to: businessEmail,
-          replyTo: email,
-          subject: ownerSubject,
-          html: ownerHtml
-        });
-        ownerEmailSent = true;
-
-        // Send confirmation copy to client
-        await transporter.sendMail({
-          from: `"Neatify Solutions" <${businessEmail}>`,
-          to: email,
-          replyTo: businessEmail,
-          subject: clientSubject,
-          html: clientHtml
-        });
-        clientEmailSent = true;
-        transportMethod = 'smtp';
-      } catch (smtpErr) {
-        console.warn('Nodemailer SMTP failed:', smtpErr);
-      }
-    }
-
-    // 3. Fallback Relay
-    if (!ownerEmailSent) {
-      try {
-        await fetch('https://api.web3forms.com/submit', {
+        const web3Res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            access_key: process.env.WEB3FORMS_ACCESS_KEY || '67c9c0f8-0000-0000-0000-000000000000',
+            access_key: process.env.WEB3FORMS_ACCESS_KEY,
             email: businessEmail,
-            from_name: 'Neatify Solutions Web Lead',
+            from_name: 'Neatify Website Lead',
             subject: ownerSubject,
             customer_name: fullName,
             customer_email: email,
@@ -255,34 +263,50 @@ export default async function handler(req, res) {
             notes: propertyDetails
           })
         });
-        transportMethod = 'relay';
+
+        const web3Data = await web3Res.json();
+        if (web3Data.success) {
+          ownerEmailSent = true;
+          transportMethod = 'web3forms';
+        }
       } catch (relayErr) {
-        console.log('Relay attempt completed');
+        console.error('Web3Forms dispatch error:', relayErr);
       }
     }
 
-    // Return success response to the front-end
-    return res.status(200).json({
-      success: true,
-      businessEmailSent: true,
-      clientEmailSent: true,
-      businessRecipient: businessEmail,
-      clientRecipient: email,
-      transport: transportMethod,
-      timestamp: new Date().toISOString(),
-      leadData: {
-        name: fullName,
-        email: email,
-        phone: phone,
-        service: serviceType,
-        community: location,
-        scope: propertyScope,
-        preferredDate: preferredDate || 'Flexible / ASAP'
-      }
-    });
+    // Return structured result to client
+    if (ownerEmailSent) {
+      return res.status(200).json({
+        success: true,
+        businessEmailSent: ownerEmailSent,
+        clientEmailSent: clientEmailSent,
+        businessRecipient: businessEmail,
+        clientRecipient: email,
+        transport: transportMethod,
+        timestamp: new Date().toISOString()
+      });
+    } else {
+      // Explain exactly why emails cannot dispatch yet
+      return res.status(200).json({
+        success: false,
+        requiresConfiguration: true,
+        error: 'No email transport credentials configured in Vercel.',
+        message: 'To deliver real emails into your Gmail inbox, add GMAIL_APP_PASSWORD or WEB3FORMS_ACCESS_KEY in Vercel Environment Variables.',
+        leadData: {
+          name: fullName,
+          email: email,
+          phone: phone,
+          service: serviceType,
+          community: location,
+          scope: propertyScope,
+          preferredDate: preferredDate || 'Flexible / ASAP',
+          notes: propertyDetails
+        }
+      });
+    }
 
   } catch (error) {
-    console.error('Error handling quote submission:', error);
+    console.error('Fatal error handling quote submission:', error);
     return res.status(500).json({
       success: false,
       error: 'Internal server error processing quote request'
