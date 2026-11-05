@@ -253,10 +253,6 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
                 </div>
               </div>
 
-              {/* Official PRD Confirmation Copy */}
-              <div className="max-w-md mx-auto text-[11px] sm:text-xs text-charcoal-muted bg-sage-50/60 border border-sage-100 rounded-xl p-3 leading-relaxed text-left">
-                <strong>Next Step:</strong> "Thank you for contacting Neatify Solutions. Your quote request has been submitted. We appreciate your interest and will review the details provided. If you need to add information, please contact us using the phone number shown on this website."
-              </div>
 
               {/* Action Buttons */}
               <div className="pt-2 flex flex-col sm:flex-row gap-2.5 justify-center">
