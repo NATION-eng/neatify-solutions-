@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowUpRight, Phone, Sparkles, ShieldCheck, Leaf, MapPin, Star } from 'lucide-react';
 
 export default function Hero({ onOpenQuote }) {
-  const heroImageUrl = "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80";
+  const heroImageUrl = "/assets/images/hero_cleaner.jpg";
 
   return (
     <section id="home" className="relative pt-3 sm:pt-4 pb-8 sm:pb-12 px-3 sm:px-6 lg:px-8">
@@ -15,7 +15,7 @@ export default function Hero({ onOpenQuote }) {
           <div className="absolute inset-x-0 top-0 h-[420px] lg:hidden pointer-events-none z-0 overflow-hidden">
             <img 
               src={heroImageUrl} 
-              alt="Neatify clean Scandinavian living space" 
+              alt="Neatify professional cleaner in uniform" 
               className="w-full h-full object-cover object-top opacity-60 filter brightness-[1.03]"
               loading="eager"
             />
@@ -136,7 +136,7 @@ export default function Hero({ onOpenQuote }) {
               
               <img 
                 src={heroImageUrl} 
-                alt="Professional Neatify cleaner providing spotless cleaning in a modern living space" 
+                alt="Professional Neatify cleaner providing spotless cleaning in Kawartha Lakes" 
                 className="w-full h-full object-cover object-center scale-105 transition-transform duration-700 hover:scale-100"
                 loading="eager"
               />
