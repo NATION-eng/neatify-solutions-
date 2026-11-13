@@ -8,14 +8,12 @@ export default function ServicesSection({ onSelectService }) {
       title: 'Airbnb & Vacation Rental',
       category: 'Cottages & Short-Term',
       icon: Key,
-      image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80',
-      description: 'Reliable turnover cleaning to prepare your rental property or cottage for 5-star guest reviews.',
+      image: '/assets/images/service_airbnb.jpg',
+      description: 'Reliable turnover cleaning designed to prepare your cottage or rental for 5-star guest reviews.',
       inclusions: [
-        'Rapid same-day guest turnover service',
-        'Crisp bed making & linen preparation',
-        'Thorough kitchen & bathroom sanitizing',
-        'Property inspection & damage reporting',
-        'Recurring turnover schedules across cottage country'
+        'Same-day guest turnover & linen care',
+        'Deep kitchen & bathroom sanitization',
+        'Damage inspection & supply restocking'
       ],
       idealFor: 'Short-term rental hosts, cottage owners & property managers.'
     },
@@ -24,32 +22,28 @@ export default function ServicesSection({ onSelectService }) {
       title: 'Residential Cleaning',
       category: 'Home & Living',
       icon: Home,
-      image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
-      description: 'Keep your home fresh, comfortable, and spotless without the stress of doing everything yourself.',
+      image: '/assets/images/service_residential.jpg',
+      description: 'Keep your home fresh, healthy, and spotless without the stress of weekend chores.',
       inclusions: [
-        'Regular maintenance (weekly, bi-weekly, monthly)',
-        'Kitchen degreasing & deep sanitization',
-        'Complete bathroom descaling & polishing',
-        'Move-in & move-out deep cleanings',
-        'Dusting, baseboards & hardwood floor care'
+        'Weekly, bi-weekly & monthly upkeep',
+        'Kitchen degreasing & bath descaling',
+        'Dusting, baseboards & floor care'
       ],
-      idealFor: 'Busy professionals, families & homeowners in Kawartha Lakes.'
+      idealFor: 'Busy families and homeowners across Kawartha Lakes.'
     },
     {
       id: 'commercial',
       title: 'Commercial Cleaning',
       category: 'Workplaces & Offices',
       icon: Building2,
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
-      description: 'Maintain a clean, welcoming, and productive environment for your staff, clients, and visitors.',
+      image: '/assets/images/service_commercial.jpg',
+      description: 'Maintain an immaculate, hygienic environment for your clients, staff, and visitors.',
       inclusions: [
-        'Routine office & workplace sanitization',
-        'Restroom cleaning & supply replenishment',
-        'Common-area & conference room upkeep',
-        'Floor care, vacuuming & waste removal',
+        'Workplace & office sanitization',
+        'Restroom upkeep & supply restocking',
         'Flexible after-hours & weekend schedules'
       ],
-      idealFor: 'Offices, clinics, retail shops & commercial properties.'
+      idealFor: 'Offices, medical clinics & commercial suites.'
     }
   ];
 
@@ -66,8 +60,8 @@ export default function ServicesSection({ onSelectService }) {
             Tailored Cleaning Solutions <br className="hidden sm:inline" />
             for Every Property
           </h2>
-          <p className="mt-3 text-base text-charcoal-muted leading-relaxed">
-            From rural lakeside cottages in Bobcaygeon to family homes and commercial offices in Lindsay, Neatify provides meticulous care.
+          <p className="mt-3 text-sm sm:text-base text-charcoal-muted leading-relaxed">
+            Meticulous, professional cleaning tailored to your space, schedule, and lifestyle across Kawartha Lakes.
           </p>
         </div>
 

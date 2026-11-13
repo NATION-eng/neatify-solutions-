@@ -47,8 +47,7 @@ export default function Hero({ onOpenQuote }) {
 
                 {/* Subtitle with Regional Context */}
                 <p className="text-sm sm:text-base lg:text-lg text-charcoal-800 lg:text-charcoal-muted leading-relaxed font-normal">
-                  Trusted cleaning services for homes, workplaces, and vacation rentals throughout{' '}
-                  <span className="font-semibold text-charcoal-900">Lindsay, Bobcaygeon, Fenelon Falls</span>, and the Kawartha Lakes. Fresh spaces, healthier living.
+                  Premium, dependable cleaning for homes, cottages, and workplaces across <span className="font-semibold text-charcoal-900">Kawartha Lakes</span>.
                 </p>
 
                 {/* Action Buttons: Stacked on small screens, row on sm+ */}
@@ -79,7 +78,7 @@ export default function Hero({ onOpenQuote }) {
                 {/* Service Area Indicator Pill */}
                 <div className="pt-1 flex items-center gap-2 text-[11px] sm:text-xs text-charcoal-muted">
                   <MapPin className="w-3.5 h-3.5 text-brand-leaf flex-shrink-0" />
-                  <span>HQ: 164 Colborne St. West, Lindsay • Serving Kawartha Lakes</span>
+                  <span>KAWARTHA LAKES, ONTARIO • Lindsay • Bobcaygeon • Fenelon Falls</span>
                 </div>
 
               </div>

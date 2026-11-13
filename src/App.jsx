@@ -5,6 +5,7 @@ import ServicesSection from './components/ServicesSection';
 import WhyChooseUs from './components/WhyChooseUs';
 import ServiceAreasSection from './components/ServiceAreasSection';
 import AboutSection from './components/AboutSection';
+import TestimonialsSection from './components/TestimonialsSection';
 import FAQSection from './components/FAQSection';
 import Footer from './components/Footer';
 import MobileQuickBar from './components/MobileQuickBar';
@@ -41,11 +42,14 @@ export default function App() {
         {/* Hero Section */}
         <Hero onOpenQuote={() => handleOpenQuote('Residential')} />
 
-        {/* 3 Core Services: Residential, Commercial, Airbnb */}
+        {/* 3 Core Services: Airbnb, Residential, Commercial */}
         <ServicesSection onSelectService={(svc) => handleOpenQuote(svc)} />
 
         {/* Why Choose Neatify Solutions */}
         <WhyChooseUs onOpenQuote={() => handleOpenQuote('Residential')} />
+
+        {/* Verified Client Testimonials */}
+        <TestimonialsSection onOpenQuote={() => handleOpenQuote('Residential')} />
 
         {/* Service Areas (Lindsay, Bobcaygeon, Fenelon Falls) */}
         <ServiceAreasSection onOpenQuote={() => handleOpenQuote('Residential')} />

@@ -6,22 +6,22 @@ export default function WhyChooseUs({ onOpenQuote }) {
     {
       icon: MapPin,
       title: 'Local to Kawartha Lakes',
-      description: 'Based directly at 164 Colborne St. West in Lindsay, serving our neighbours across Lindsay, Bobcaygeon, and Fenelon Falls.'
+      description: 'Locally based in Kawartha Lakes, Ontario. Serving Lindsay, Bobcaygeon, Fenelon Falls, and surrounding communities.'
     },
     {
       icon: Sparkles,
       title: 'Meticulous Attention to Detail',
-      description: 'We do not cut corners. From deep baseboard dusting to sanitizing high-touch surfaces, our cleaning standards are uncompromising.'
+      description: 'Uncompromising standards—from deep baseboard dusting to sanitizing high-touch surfaces.'
     },
     {
       icon: Clock,
       title: 'Flexible Scheduling',
-      description: 'Whether you need a one-time turnover, bi-weekly residential refresh, or scheduled after-hours office care, we adapt to your routine.'
+      description: 'Turnovers, recurring home cleans, or after-hours office care adapted to your calendar.'
     },
     {
       icon: HeartHandshake,
       title: 'Direct, Respectful Communication',
-      description: 'No automated bots or confusing phone trees. We review every property request personally and keep you informed every step of the way.'
+      description: 'Real local support. We personally review every inquiry and keep you informed every step.'
     }
   ];
 
@@ -41,8 +41,8 @@ export default function WhyChooseUs({ onOpenQuote }) {
               A Local Cleaning Partner You Can Count On
             </h2>
             
-            <p className="text-base text-charcoal-muted leading-relaxed">
-              We founded Neatify Solutions to give Kawartha Lakes homeowners, businesses, and rental hosts a dependable, stress-free cleaning experience. We treat your property with the same dignity and attention we would give our own.
+            <p className="text-sm sm:text-base text-charcoal-muted leading-relaxed">
+              Dependable, spotless cleaning with transparent communication and care you can trust. We treat your property with the same dignity and attention we give our own.
             </p>
 
             <div className="pt-2">

@@ -91,6 +91,13 @@ export default function Navbar({ onOpenQuote }) {
             </a>
 
             <a 
+              href="#testimonials" 
+              className="px-3.5 py-2 rounded-full hover:text-brand-forest hover:bg-sage-50 transition-colors"
+            >
+              Reviews
+            </a>
+
+            <a 
               href="#service-areas" 
               className="px-3.5 py-2 rounded-full hover:text-brand-forest hover:bg-sage-50 transition-colors"
             >
@@ -202,6 +209,13 @@ export default function Navbar({ onOpenQuote }) {
                   className="p-2.5 rounded-xl hover:bg-sage-50"
                 >
                   Why Neatify
+                </a>
+                <a 
+                  href="#testimonials" 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2.5 rounded-xl hover:bg-sage-50"
+                >
+                  Client Reviews
                 </a>
                 <a 
                   href="#service-areas" 

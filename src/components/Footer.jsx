@@ -16,7 +16,7 @@ export default function Footer({ onOpenQuote }) {
           <div className="sm:col-span-2 lg:col-span-4 space-y-4">
             <Logo variant="light" size="lg" />
             <p className="text-xs sm:text-sm text-sage-200/80 leading-relaxed max-w-sm pt-2">
-              Dependable, premium cleaning solutions for homes, commercial workplaces, and Airbnb vacation rentals throughout Lindsay and the Kawartha Lakes.
+              Dependable, spotless cleaning for homes, workplaces, and vacation rentals across Kawartha Lakes.
             </p>
             <div className="pt-2">
               <button
@@ -63,16 +63,16 @@ export default function Footer({ onOpenQuote }) {
             </div>
             <ul className="space-y-2 text-xs sm:text-sm text-sage-200/80">
               <li>
-                <a href="#service-areas" className="hover:text-white transition-colors">Lindsay (HQ)</a>
+                <a href="#service-areas" className="hover:text-white transition-colors">Kawartha Lakes, ON</a>
+              </li>
+              <li>
+                <a href="#service-areas" className="hover:text-white transition-colors">Lindsay</a>
               </li>
               <li>
                 <a href="#service-areas" className="hover:text-white transition-colors">Bobcaygeon</a>
               </li>
               <li>
                 <a href="#service-areas" className="hover:text-white transition-colors">Fenelon Falls</a>
-              </li>
-              <li>
-                <a href="#service-areas" className="hover:text-white transition-colors">Kawartha Lakes Region</a>
               </li>
               <li>
                 <a href="#service-areas" className="hover:text-white transition-colors">Surrounding Communities</a>
@@ -88,7 +88,7 @@ export default function Footer({ onOpenQuote }) {
             <ul className="space-y-2.5 text-xs sm:text-sm text-sage-200/80">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-brand-leaf mt-0.5 flex-shrink-0" />
-                <span>164 Colborne St. West, Lindsay, Kawartha Lakes, ON</span>
+                <span className="font-medium">KAWARTHA LAKES, ONTARIO</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-brand-leaf flex-shrink-0" />

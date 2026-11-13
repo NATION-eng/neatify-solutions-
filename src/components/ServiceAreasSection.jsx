@@ -8,21 +8,21 @@ export default function ServiceAreasSection({ onOpenQuote }) {
   const primaryHubs = [
     {
       name: 'Lindsay',
-      status: 'Primary Hub & Office Location',
-      address: '164 Colborne St. West',
-      highlights: 'Residential homes, commercial offices, healthcare clinics & move-in cleanings.'
+      status: 'Kawartha Lakes, ON',
+      address: 'Kawartha Lakes, Ontario',
+      highlights: 'Residential homes, commercial offices, medical suites & move-in cleans.'
     },
     {
       name: 'Bobcaygeon',
-      status: 'Full Service Area',
-      address: 'Cottage Country & Town',
-      highlights: 'Lakeside vacation properties, Airbnb guest turnovers & residential maintenance.'
+      status: 'Kawartha Lakes, ON',
+      address: 'Cottage Country & Lakes',
+      highlights: 'Lakeside properties, cottage rentals & seasonal guest turnovers.'
     },
     {
       name: 'Fenelon Falls',
-      status: 'Full Service Area',
-      address: 'Cameron Lake & Sturgeon Lake',
-      highlights: 'Short-term rentals, family residences, retail spaces & seasonal turnovers.'
+      status: 'Kawartha Lakes, ON',
+      address: 'Cameron & Sturgeon Lakes',
+      highlights: 'Vacation rentals, family residences & local retail spaces.'
     }
   ];
 
@@ -44,8 +44,8 @@ export default function ServiceAreasSection({ onOpenQuote }) {
           <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-charcoal-900 tracking-tight">
             Proudly Serving Kawartha Lakes
           </h2>
-          <p className="mt-3 text-base text-charcoal-muted leading-relaxed">
-            Our teams are based locally, ensuring prompt arrivals, dependable scheduling, and intimate knowledge of rural, town, and cottage properties.
+          <p className="mt-3 text-sm sm:text-base text-charcoal-muted leading-relaxed">
+            Locally based for prompt arrivals, dependable scheduling, and personalized care across rural and town properties.
           </p>
         </div>
 

@@ -21,8 +21,8 @@ export default function AboutSection() {
                 <div className="font-display font-bold text-sm text-charcoal-900">
                   Neatify Solutions Inc.
                 </div>
-                <div className="text-[11px] text-charcoal-muted">
-                  Headquartered in Lindsay, Ontario
+                <div className="text-[11px] text-brand-forest font-semibold">
+                  KAWARTHA LAKES, ONTARIO
                 </div>
               </div>
             </div>
@@ -38,12 +38,8 @@ export default function AboutSection() {
               Dedicated to Fresher Spaces & Brighter Days
             </h2>
 
-            <p className="text-base text-charcoal-muted leading-relaxed">
-              At Neatify Solutions, we believe that a clean environment directly shapes your daily peace of mind and productivity. Whether returning home after a demanding day, welcoming vacationers to your lakeside rental, or opening office doors to clients, you deserve a space that feels refreshed, sanitary, and inviting.
-            </p>
-
-            <p className="text-base text-charcoal-muted leading-relaxed">
-              We operate with clear communication, punctuality, and unwavering attention to detail. Every property is treated with the utmost respect, using proven methods and responsible cleaning practices tailored to your specific schedule.
+            <p className="text-sm sm:text-base text-charcoal-muted leading-relaxed">
+              A clean space creates peace of mind. Whether returning home from a busy week, welcoming guests to your lakeside rental, or opening doors to clients, Neatify Solutions delivers spotless environments through clear communication, punctuality, and uncompromising care.
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-sage-100">
