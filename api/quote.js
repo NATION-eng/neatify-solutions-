@@ -1,7 +1,36 @@
 import nodemailer from 'nodemailer';
 
 export default async function handler(req, res) {
-  // Only accept POST requests
+  // Allow GET requests for diagnostic check
+  if (req.method === 'GET') {
+    const hasGmailPass = Boolean(process.env.GMAIL_APP_PASSWORD || process.env.SMTP_PASS);
+    const hasResend = Boolean(process.env.RESEND_API_KEY);
+    const hasWeb3Forms = Boolean(process.env.WEB3FORMS_ACCESS_KEY);
+
+    return res.status(200).json({
+      status: 'online',
+      endpoint: '/api/quote',
+      businessEmail: 'neatifysolutionsinc@gmail.com',
+      readyToSendEmails: hasGmailPass || hasResend || hasWeb3Forms,
+      transports: {
+        gmail_smtp: {
+          configured: hasGmailPass,
+          user: (process.env.GMAIL_USER || 'neatifysolutionsinc@gmail.com').trim()
+        },
+        resend: {
+          configured: hasResend
+        },
+        web3forms: {
+          configured: hasWeb3Forms
+        }
+      },
+      instructions: !hasGmailPass && !hasResend && !hasWeb3Forms
+        ? 'Add GMAIL_APP_PASSWORD in Vercel Project Settings -> Environment Variables to enable automated dual-dispatch emails.'
+        : 'Email transport credentials detected. Ready to dispatch.'
+    });
+  }
+
+  // Only accept POST requests for booking submissions
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, error: 'Method Not Allowed' });
   }
@@ -136,11 +165,11 @@ export default async function handler(req, res) {
               <p style="margin: 8px 0;">
                 📞 <strong>Phone:</strong> <a href="tel:4169105281" style="color: #204632;">416-910-5281</a><br />
                 ✉️ <strong>Email:</strong> <a href="mailto:${businessEmail}" style="color: #204632;">${businessEmail}</a><br />
-                📍 <strong>Location:</strong> 164 Colborne St. West, Lindsay, Kawartha Lakes, ON
+                📍 <strong>Location:</strong> Kawartha Lakes, Ontario
               </p>
             </div>
             <div class="footer">
-              © ${new Date().getFullYear()} Neatify Solutions Inc. • Lindsay, Ontario<br />
+              © ${new Date().getFullYear()} Neatify Solutions Inc. • Kawartha Lakes, Ontario<br />
               <a href="https://neatifysolutions.ca" style="color: #204632;">neatifysolutions.ca</a>
             </div>
           </div>
@@ -152,6 +181,8 @@ export default async function handler(req, res) {
     let clientEmailSent = false;
     let transportMethod = 'none';
 
+    let dispatchError = null;
+
     // -------------------------------------------------------------
     // PRIORITY 1: Google SMTP via Nodemailer (Free & Direct)
     // Triggered when GMAIL_APP_PASSWORD is set in Vercel Environment Variables
@@ -159,17 +190,25 @@ export default async function handler(req, res) {
     const gmailPass = process.env.GMAIL_APP_PASSWORD || process.env.SMTP_PASS;
     if (gmailPass) {
       try {
+        const userAccount = (process.env.GMAIL_USER || businessEmail).trim();
+        const cleanPass = gmailPass.replace(/\s+/g, '');
+
         const transporter = nodemailer.createTransport({
-          service: 'gmail',
+          host: 'smtp.gmail.com',
+          port: 465,
+          secure: true, // SSL
           auth: {
-            user: process.env.GMAIL_USER || businessEmail,
-            pass: gmailPass.replace(/\s+/g, '') // remove spaces from 16-letter app password
+            user: userAccount,
+            pass: cleanPass
+          },
+          tls: {
+            rejectUnauthorized: false
           }
         });
 
         // Send to owner
         await transporter.sendMail({
-          from: `"Neatify Website" <${process.env.GMAIL_USER || businessEmail}>`,
+          from: `"Neatify Website Lead" <${userAccount}>`,
           to: businessEmail,
           replyTo: email,
           subject: ownerSubject,
@@ -179,7 +218,7 @@ export default async function handler(req, res) {
 
         // Send confirmation to client
         await transporter.sendMail({
-          from: `"Neatify Solutions" <${process.env.GMAIL_USER || businessEmail}>`,
+          from: `"Neatify Solutions" <${userAccount}>`,
           to: email,
           replyTo: businessEmail,
           subject: clientSubject,
@@ -189,6 +228,7 @@ export default async function handler(req, res) {
         transportMethod = 'gmail_smtp';
       } catch (smtpErr) {
         console.error('Nodemailer Gmail SMTP dispatch error:', smtpErr);
+        dispatchError = `Gmail SMTP error: ${smtpErr.message}`;
       }
     }
 
@@ -289,9 +329,11 @@ export default async function handler(req, res) {
       // Explain exactly why emails cannot dispatch yet
       return res.status(200).json({
         success: false,
-        requiresConfiguration: true,
-        error: 'No email transport credentials configured in Vercel.',
-        message: 'To deliver real emails into your Gmail inbox, add GMAIL_APP_PASSWORD or WEB3FORMS_ACCESS_KEY in Vercel Environment Variables.',
+        requiresConfiguration: !dispatchError,
+        error: dispatchError || 'No email transport credentials configured in Vercel.',
+        message: dispatchError 
+          ? 'An error occurred connecting to Gmail SMTP. Please verify GMAIL_USER and GMAIL_APP_PASSWORD.'
+          : 'To deliver real emails into your Gmail inbox, add GMAIL_APP_PASSWORD in Vercel Environment Variables.',
         leadData: {
           name: fullName,
           email: email,

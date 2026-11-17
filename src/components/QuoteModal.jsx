@@ -190,43 +190,54 @@ export default function QuoteModal({ isOpen, onClose, defaultService = 'Resident
               </div>
 
               {/* CLIENT EMAIL CHECK NOTIFICATION BOX */}
-              <div className="max-w-md mx-auto bg-gradient-to-br from-sage-50 to-[#EDF3E8] border-2 border-brand-forest/20 rounded-2xl p-4 sm:p-5 text-left shadow-subtle">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-brand-forest text-white flex items-center justify-center flex-shrink-0 shadow-sm">
-                    <Mail className="w-5 h-5 text-brand-leaf" />
-                  </div>
-                  <div className="space-y-1">
-                    <div className="text-xs sm:text-sm font-bold text-brand-forest flex items-center gap-1.5">
-                      <span>Please Check Your Email</span>
-                      <span className="w-2 h-2 rounded-full bg-brand-leaf animate-ping"></span>
+              {dispatchStatus?.success ? (
+                <div className="max-w-md mx-auto bg-gradient-to-br from-sage-50 to-[#EDF3E8] border-2 border-brand-forest/20 rounded-2xl p-4 sm:p-5 text-left shadow-subtle">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-brand-forest text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+                      <Mail className="w-5 h-5 text-brand-leaf" />
                     </div>
-                    <p className="text-xs text-charcoal-700 leading-relaxed">
-                      We have sent a full copy of your booking request and details to:
-                    </p>
-                    <div className="font-mono text-xs font-bold text-charcoal-900 bg-white/80 px-2.5 py-1 rounded-lg border border-sage-200 inline-block mt-0.5 break-all">
-                      {submittedData?.email || formData.email}
+                    <div className="space-y-1">
+                      <div className="text-xs sm:text-sm font-bold text-brand-forest flex items-center gap-1.5">
+                        <span>Confirmation Sent — Please Check Your Email</span>
+                        <span className="w-2 h-2 rounded-full bg-brand-leaf animate-ping"></span>
+                      </div>
+                      <p className="text-xs text-charcoal-700 leading-relaxed">
+                        We have dispatched a full copy of your booking request and details to:
+                      </p>
+                      <div className="font-mono text-xs font-bold text-charcoal-900 bg-white/80 px-2.5 py-1 rounded-lg border border-sage-200 inline-block mt-0.5 break-all">
+                        {submittedData?.email || formData.email}
+                      </div>
+                      <p className="text-[11px] text-charcoal-muted pt-1">
+                        Sent directly from: <strong>neatifysolutionsinc@gmail.com</strong>. Please check your inbox (and spam or junk folder).
+                      </p>
                     </div>
-                    <p className="text-[11px] text-charcoal-muted pt-1">
-                      Sent from: <strong>neatifysolutionsinc@gmail.com</strong>. If you do not see it in a few minutes, please check your spam or junk folder.
-                    </p>
                   </div>
                 </div>
-              </div>
-
-              {/* Instant 1-Tap Email Dispatch Action (Guaranteed to Work Immediately) */}
-              <div className="max-w-md mx-auto bg-white border border-sage-200 rounded-2xl p-4 text-left">
-                <div className="text-xs text-charcoal-800 mb-2">
-                  <strong>Need immediate confirmation?</strong> Tap below to send this booking directly from your email app to our inbox:
+              ) : (
+                <div className="max-w-md mx-auto bg-amber-50/90 border border-amber-200/90 rounded-2xl p-4 sm:p-5 text-left shadow-subtle">
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-brand-forest text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+                      <Mail className="w-5 h-5 text-brand-leaf" />
+                    </div>
+                    <div className="space-y-1">
+                      <div className="text-xs sm:text-sm font-bold text-charcoal-900">
+                        Almost Done! Instant 1-Tap Delivery
+                      </div>
+                      <p className="text-xs text-charcoal-700 leading-relaxed">
+                        Your booking summary is compiled. Tap below to send it straight to our inbox at <strong>neatifysolutionsinc@gmail.com</strong>:
+                      </p>
+                    </div>
+                  </div>
+                  <a
+                    href={directMailtoUrl}
+                    className="w-full inline-flex items-center justify-center gap-2 bg-brand-forest hover:bg-brand-deep text-white py-3 px-4 rounded-xl text-xs sm:text-sm font-bold shadow-sm transition-all"
+                  >
+                    <Mail className="w-4 h-4 text-brand-leaf" />
+                    <span>Send Booking to neatifysolutionsinc@gmail.com (1 Tap)</span>
+                    <ExternalLink className="w-3.5 h-3.5 opacity-70" />
+                  </a>
                 </div>
-                <a
-                  href={directMailtoUrl}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-brand-forest hover:bg-brand-deep text-white py-2.5 px-4 rounded-xl text-xs font-bold shadow-sm transition-all"
-                >
-                  <Mail className="w-4 h-4 text-brand-leaf" />
-                  <span>Send Booking via My Email App (1 Tap)</span>
-                  <ExternalLink className="w-3.5 h-3.5 opacity-70" />
-                </a>
-              </div>
+              )}
 
               {/* Booking Summary Card */}
               <div className="max-w-md mx-auto bg-white border border-sage-200 rounded-2xl p-4 text-left text-xs space-y-2">
